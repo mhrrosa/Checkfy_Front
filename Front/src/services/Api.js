@@ -1,4 +1,4 @@
-const baseUrl = 'http://127.0.0.1:5000';
+const baseUrl = 'http://checkfy-back.vercel.app';
 
 function post(url, data) {
   return fetch(`${baseUrl}${url}`, {
