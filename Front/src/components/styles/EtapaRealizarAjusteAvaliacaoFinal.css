@@ -1,0 +1,88 @@
+.table-informacoes-gerais-ajuste-avaliacao-final {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.table-informacoes-gerais-ajuste-avaliacao-final th,
+.table-informacoes-gerais-ajuste-avaliacao-final td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+  
+.table-informacoes-gerais-ajuste-avaliacao-final th {
+    background-color: #f2f2f2;
+    text-align: left;
+    width: 40%;
+}
+  
+.table-informacoes-gerais-ajuste-avaliacao-final td {
+    text-align: left;
+}
+  
+.select-ajuste-avaliacao-final{
+    width: 60%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px; /* Tamanho de fonte consistente */
+    box-sizing: border-box; /* Garante que o padding esteja incluído na largura */
+}
+
+.div-projeto-evidencias-ajuste-avaliacao-final {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.select-grau-ajuste-avaliacao-final {
+    width: 100%;
+    padding: 5px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px; /* Tamanho de fonte consistente */
+    box-sizing: border-box; /* Garante que o padding esteja incluído na largura */
+}
+
+.tabela-caracterizacao-ajustefinal {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.tabela-caracterizacao-ajustefinal th, .tabela-caracterizacao-ajustefinal td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.tabela-caracterizacao-ajustefinal th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+  
+.tabela-caracterizacao-ajustefinal td {
+    text-align: left;
+    width: 75%;
+}
+
+.title-caracterizacao-ajuste-final {
+    color: black;
+    font-size: 1.8em;
+    margin: 0 0 20px 0;
+    text-decoration: underline;
+}
+
+.div-resultado-auditoria {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.imagem-certo-errado {
+    width: 20px;
+    margin-left: 10px;
+    height: 20px;
+}

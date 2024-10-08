@@ -1,0 +1,92 @@
+.management-project-title {
+    color: #ffffff;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+.input-wrapper-project {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.checkbox-wrapper-project {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tr-projeto {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.projeto-inserido-td {
+    width: 16em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-preenchido-projeto {
+    width: 100%;
+    height:40px;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    max-width: 100%;
+    word-wrap: break-word;
+    resize: none;
+}
+
+.checkbox-projeto-status {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    vertical-align: middle;
+    border: 1px solid #dcdcdc;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.checkbox-projeto-status:checked {
+    background: #007BFF;
+    border-color: #007BFF;
+}
+
+.checkbox-projeto-status:checked::after {
+    content: '';
+    width: 8px;
+    height: 3px;
+    border: solid white;
+    border-width: 0 0 2px 2px; /* Ajuste a largura da borda aqui */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg); /* Ajuste a rotação aqui */
+}
+
+.acoes-td-projetos {
+    margin-left: 10px;
+    text-align: right;
+}
+
+.nenhum-encontrado {
+    color: #ffffff;
+}
+
+.conteudo-etapa {
+    color: #ffffff;
+}

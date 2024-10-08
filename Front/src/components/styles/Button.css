@@ -1,0 +1,446 @@
+.button {
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+}
+
+.button-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+    padding: 10px 10px;
+}
+
+.button-primary:hover {
+    background-color: #fff;
+    color: #001034;
+}
+
+.button-second {
+    color: #fff;
+    background-color: #001034;
+    border: 1px solid #001034;
+    padding: 10px 10px;
+}
+
+.button-second:hover {
+    background-color: #fff;
+    border: 1px solid #001034;
+    color: #001034;
+}
+
+.botoes-home-gerenciamento {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-home-gerenciamento {
+    font-size: 1.2em;
+    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    background-color: #001034;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 3em;
+    padding: 1em 1em;
+    transition: background-color 0.3s ease;
+    margin-right: 3em;
+}
+
+.button-home-gerenciamento:last-child {
+    margin-right: 0;
+}
+
+.button-home-gerenciamento:hover {
+    background-color: #001a56;
+}
+
+.botoes-avaliacao {
+    display: flex;
+    gap: 10px;
+}
+
+.button-home-avaliacao {
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+    color: #001034;
+    border: 2px solid #001034;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px;
+    transition: 0.3s
+}
+
+.button-home-avaliacao:hover {
+    background-color: #001034;
+    color: white;
+}
+
+.button-close-form {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #00437e;
+}
+
+.button-close-form-etapa {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #00437e;
+}
+
+.button-end-form {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: bolder;
+    color: white;
+    border: 4px solid #00437e;
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: #001034;
+    transition: background-color 0.3s;
+}
+
+.button-end-form:hover {
+    background-color: #00437e;
+}
+
+.button-add-email {
+    padding: 3px 10px 0px 10px;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: #001034;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+    transition: color 0.3s;
+}
+
+.button-add-email:hover {
+    color: #58b66e;
+}
+
+.button-remove {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: 3px solid #7e0000;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #001034;
+    align-self: flex-start;
+    transition: background-color 0.3s;
+}
+
+.button-remove:hover {
+    background-color: #7e0000;
+}
+
+.button-remove-avaliacao {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border: 2px solid #7e0000;
+    color: #7e0000;
+    border-radius: 10px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s;
+}
+
+.button-remove-avaliacao:hover {
+    background-color: #7e0000;
+    color: white;
+}
+
+.botoes-acoes {
+    width: 13em;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.button-acao {
+    padding: 10px 5px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border: 4px solid #00437e;
+    border-radius: 18px;
+    cursor: pointer;
+    background-color: #001034;
+    transition: background-color 0.3s;
+}
+
+.button-acao:hover {
+    background-color: #00437e;
+}
+
+.button-documentos-etapa-evidencia {
+    padding: 10px 10px;
+    margin-left: 10px;
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    transition: background-color 0.3s;
+}
+
+.button-documentos-etapa-evidencia:hover {
+    background-color: #0056b3;
+}
+
+.button-mostrar-documento-etapa-evidencia {
+    padding: 10px 10px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #009f1d;
+    transition: background-color 0.3s;
+}
+
+.button-mostrar-documento-etapa-evidencia:hover {
+    background-color: #007c17;
+}
+
+.button-mostrar-relatorio {
+    padding: 10px 10px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #009f1d;
+    transition: background-color 0.3s;
+}
+
+.button-mostrar-relatorio:hover {
+    background-color: #007c17;
+}
+
+.button-mostrar-relatorio-auditoria {
+    padding: 10px 10px;
+    font-size: 0.9em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    transition: background-color 0.3s;
+}
+
+.button-mostrar-relatorio-auditoria:hover {
+    background-color: #0056b3;
+}
+
+.button-excluir-documento-etapa-evidencia {
+    padding: 10px 10px;
+    margin-left: 20px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #9f0000;
+    transition: background-color 0.3s;
+}
+
+.button-excluir-documento-etapa-evidencia:hover {
+    background-color: #7c0000;
+}
+
+.sidebar button {
+    width: 100%; /* Botão ocupa a largura inteira do bloco */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0; /* Remova as bordas arredondadas */
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+.sidebar button:first-child {
+    border-top-left-radius: 5px; /* Adicione borda arredondada apenas ao primeiro botão */
+    border-top-right-radius: 5px;
+}
+  
+.sidebar button:last-child {
+    border-bottom-left-radius: 5px; /* Adicione borda arredondada apenas ao último botão */
+    border-bottom-right-radius: 5px;
+}
+  
+.sidebar button:hover {
+    background-color: #0056b3;
+}
+  
+.sidebar button.current-step {
+    background-color: #28a745; /* Cor de fundo para indicar a etapa atual */
+}
+
+.button-acao-projeto {
+    padding: 8px 8px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border: 4px solid #00437e;
+    border-radius: 18px;
+    cursor: pointer;
+    background-color: #001034;
+    transition: background-color 0.3s;
+    float: right;
+}
+
+.button-acao-projeto:hover {
+    background-color: #00437e;
+}
+
+.button-add-document {
+    padding: 3px 10px 0px 10px;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: #001034;
+    transition: background-color 0.3s;
+    transition: color 0.3s;
+}
+
+.button-add-document:hover {
+    color: #58b66e;
+}
+
+.button-add-project {
+    padding: 10px 10px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.button-add-project:hover {
+    background-color: #00437e;
+}
+
+.button-update-project {
+    padding: 10px 10px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.button-update-project:hover {
+    background-color: #00437e;
+}
+
+.button-save {
+    margin-top: 20px;
+    width: 10em;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.button-save:hover {
+    background-color: #0056b3;
+}  
+
+.button-next {
+    margin-top: 20px;
+    width: 12em;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button-next:hover {
+    background-color: #0056b3;
+  }  
+
+.button-solicitar-auditoria {
+    padding: 10px 20px;
+    width: 15em;
+    font-weight: bolder;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.button-solicitar-auditoria:hover {
+    background-color: #0056b3;
+}
+
+.button-confirmar-visualizacao {
+    padding: 10px 20px;
+    width: 17em;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+}
+
+.button-confirmar-visualizacao:hover {
+    background-color: #0056b3;
+}
+
+.button-sair-avaliacao {
+    background-color: #007bff;
+    color: white;
+    width: 10em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-sair-avaliacao:hover {
+    background-color: #0056b3;
+}

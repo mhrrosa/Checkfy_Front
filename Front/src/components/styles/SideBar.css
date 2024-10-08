@@ -1,0 +1,56 @@
+.sidebar {
+    width: 225px;
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-right: 1px solid #ced4da; /* Borda à direita */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto; /* Permite rolagem se o conteúdo for maior que a tela */
+}
+
+/* Estilização da barra de rolagem */
+.sidebar::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra de rolagem */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #888; /* Cor da barra de rolagem */
+    border-radius: 4px; /* Bordas arredondadas */
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor da barra de rolagem ao passar o mouse */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.sidebar h3 {
+    color: #495057; /* Cor do título */
+    font-size: 1.2em; /* Tamanho da fonte do título */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Estilo para os botões desabilitados */
+button.button-disabled {
+    background-color: #d3d3d3 !important; /* Cor de fundo cinza */
+    color: #6c757d !important; /* Cor do texto cinza */
+    cursor: not-allowed !important; /* Cursor que indica que não pode ser clicado */
+    border-color: #ced4da !important; /* Cor da borda */
+}
+
+.progresso-porcentagem {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}

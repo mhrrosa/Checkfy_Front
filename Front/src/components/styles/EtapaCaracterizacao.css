@@ -1,0 +1,87 @@
+.management-etapa4-title {
+    color: #ffffff;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow: auto;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+  
+.tab-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
+}
+  
+.tab-button.active {
+    border-bottom: 2px solid #00437e;
+    font-weight: bold;
+}     
+  
+.tab-content {
+    padding-top: 5px;
+    padding-left: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.div-projetos-evidencia-caracterizacao {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.title-processo-caracterizacao {
+    color: black;
+    font-size: 1.8em;
+    margin: 0 0 20px 0;
+    text-decoration: underline;
+}
+  
+.title-resultado-caracterizacao {
+    color: black;
+    font-size: 1.3em;
+    margin: 0 0 0 10px;
+}
+  
+.title-projeto-caracterizacao {
+    color: black;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.title-evidencia-caracterizacao {
+    color: black;
+    margin-bottom: 5px;
+}
+
+.div-resultado-esperado-caracterizacao {
+    background-color: white;
+    border: 1px solid #000000;
+    padding: 20px 10px 70px 10px;
+}
+
+.select-grau-caracterizacao {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-size: 0.9em; /* Tamanho de fonte consistente */
+    box-sizing: border-box; /* Garante que o padding esteja incluído na largura */
+    margin-left: 10px;
+}
+
+.evidencia-e-botao {
+    margin-left: 10px;
+}

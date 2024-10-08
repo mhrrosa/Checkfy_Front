@@ -1,0 +1,55 @@
+.tabela-etapas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.linha-etapas th, .linha-etapas td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.linha-etapas th {
+    background-color: #f2f2f2;
+    width: 18em;
+    text-align: left;
+}
+  
+.linha-etapas td {
+    text-align: left;
+}
+
+.div-label-valor {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.div-botoes-aprovar-reprovar {
+    display: flex;
+    gap: 10px;
+}
+
+.button-aprovar-relatorio {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    background-color: #4CAF50;
+    transition: background-color 0.3s ease;
+    min-width: 150px;
+}
+
+.button-reprovar-relatorio {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    background-color: #f44336;
+    transition: background-color 0.3s ease;
+    min-width: 150px;
+}

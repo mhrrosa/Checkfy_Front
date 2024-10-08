@@ -1,0 +1,25 @@
+/* Sobre.css */
+.body-sobre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.imagem-sobre {
+    width: 100%;
+}
+
+.titulo-sobre {
+    color: black;
+}
+
+.subtitulo-sobre {
+    color: #333;
+}
+
+.texto-sobre {
+    color: #666;
+    line-height: 1.6;
+}

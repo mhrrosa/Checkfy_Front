@@ -1,0 +1,118 @@
+.dica-div {
+    background-color: #fff6d6;
+    border-left: 4px solid #ffdd36;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.dica-titulo {
+    color: #161616;
+}
+
+.dica-texto {
+    color: #353535;
+    margin: 5px 0;
+}
+
+.title-form-auditoria-final {
+    color: black;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.label-etapas {
+    font-size: 1.1em;
+    color: black;
+    margin: 5px 0;
+}
+
+.input-field-etapas {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 0.95em;
+    max-width: 100%;
+    word-wrap: break-word;
+    resize: none;
+    height: 40px;
+}
+
+.input-textarea-avaliacao {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: black;
+    box-sizing: border-box; /* Adicionado para incluir padding e border na largura e altura */
+    resize: none;
+}
+
+.textarea-wrapper {
+    width: 100%; /* Garantir que o contêiner pai tenha largura total */
+}
+
+
+
+.input-textarea-avaliacao-tabela {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: black;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.nota-adicional-div{
+    background-color: #d6efff;
+    border-left: 4px solid #36abff;
+    margin: 0 40px 0px 10px;
+    padding: 5px 0 5px 3px;
+    border-radius: 4px;
+}
+
+
+.nota-adicional-resultado {
+    font-size: 1em;
+    margin: 0;
+}
+
+.nota-adicional-tabela {
+    background-color: #d6efff;
+    border-left: 4px solid #36abff;
+    margin: 0 40px 0px 0px;
+    padding: 5px 0 5px 3px;
+    border-radius: 4px;
+}
+
+.nota-adicional-resultado-tabela {
+    font-size: 1em;
+    margin: 0;
+}
+
+.tabela-etapas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.linha-etapas th, .linha-etapas td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.linha-etapas th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+  
+.linha-etapas td {
+    text-align: left;
+}

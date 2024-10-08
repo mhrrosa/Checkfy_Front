@@ -1,0 +1,19 @@
+.tabela-etapas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+.linha-etapas th, .linha-etapas td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.linha-etapas th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.linha-etapas td {
+  text-align: left;
+}

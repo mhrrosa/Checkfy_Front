@@ -1,0 +1,32 @@
+.div-input-relatorio-ajuste-inicial {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0px;
+    gap: 10px;
+}
+
+.input-campo-relatorio-ajuste-inicial {
+    display: flex;
+}
+
+.input-campo-relatorio-ajuste-inicial + label {
+    display: inline-block; /* Garante que a label seja exibida */
+    padding: 10px;
+    background-color: #00437e;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.input-campo-relatorio-ajuste-inicial + label:hover {
+    background-color: #0066cc; 
+}
+
+.relatorio-adicionado {
+    color: black;
+    margin-left: 10px; /* Adiciona um espaço entre o texto e o botão */
+    font-size: 14px; /* Mantém o tamanho da fonte consistente */
+    font-weight: normal; /* Mantém o peso da fonte consistente */
+}

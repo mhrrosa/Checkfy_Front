@@ -1,0 +1,35 @@
+.tabela-caracterizacao-capacidade-processo {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.tabela-caracterizacao-capacidade-processo th, .tabela-caracterizacao-capacidade-processo td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.tabela-caracterizacao-capacidade-processo th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+  
+.tabela-caracterizacao-capacidade-processo td {
+    text-align: left;
+    width: 75%;
+}
+
+.title-caracterizacao-capacidade-processo {
+    color: black;
+    font-size: 1.8em;
+    margin: 0 0 20px 0;
+    text-decoration: underline;
+}
+
+.select-grau-caracterizacao-capacidade-processo {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}

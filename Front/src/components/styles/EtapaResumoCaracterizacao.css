@@ -1,0 +1,111 @@
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
+}
+
+.tab-button.active {
+    border-bottom: 2px solid #00437e;
+    font-weight: bold;
+}
+
+.tab-content {
+    padding-top: 5px;
+    padding-left: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.resumo-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.tr-table-resumo-caracterizaca {
+    display: flex;
+    align-items: center;
+}
+
+.resumo-tabela th,
+.resumo-tabela td {
+    padding: 12px 8px; /* Ajuste de espaçamento */
+    text-align: left;
+    vertical-align: middle;
+    margin: 0;
+    border: 1px solid #ccc
+}
+
+.resultado-esperado-head {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #f2f2f2;
+}
+
+.nota-head {
+    width: 30%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #f2f2f2;
+}
+
+.resultado-esperado-body {
+    width: 70%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    height: 100%;
+}
+
+.nota-body {
+    width: 30%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    height: 100%;
+}
+
+.resultado-esperado {
+    display: block; /* Garante que o texto ocupe toda a largura disponível */
+    white-space: normal; /* Permite a quebra de linha */
+    word-wrap: break-word; /* Quebra a palavra se for muito longa */
+    width: 100%; /* Defina a largura desejada */
+    height: 100%; /* Defina a altura desejada */
+}
+
+.select-grau-resumo-caracterizacao {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-size: 14px; /* Tamanho de fonte consistente */
+    box-sizing: border-box; /* Garante que o padding esteja incluído na largura */
+}
+
+.select-grau-resumo-caracterizacao-invalido {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ff9a9a;
+    border-color: #ff3434;
+    text-align: center;
+    font-size: 14px; /* Tamanho de fonte consistente */
+    box-sizing: border-box; /* Garante que o padding esteja incluído na largura */
+}
+
+.select-grau-resumo-caracterizacao-invalido:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #e6f0ff;
+}

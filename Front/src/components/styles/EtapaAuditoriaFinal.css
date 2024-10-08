@@ -1,0 +1,78 @@
+
+.div-projetos-evidencia-caracterizacao-auditoria-final {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.nota-grau-auditoria-final {
+    margin: 10px 0 0 10px;
+}
+
+.evidencia-processos-auditoria-final {
+    margin: 0 0 0 10px;
+}
+
+.resumo-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.resumo-tabela th, .resumo-tabela td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.resumo-tabela th {
+    background-color: #f2f2f2;
+    text-align: left;
+    width: 75%;
+}
+  
+.resumo-tabela td {
+    text-align: left;
+}
+
+.tabela-caracterizacao-capacidade-auditoria {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+  
+.tabela-caracterizacao-capacidade-auditoria th, .tabela-caracterizacao-capacidade-auditoria td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.tabela-caracterizacao-capacidade-auditoria th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+  
+.tabela-caracterizacao-capacidade-auditoria td {
+    text-align: left;
+    width: 75%;
+}
+
+.title-caracterizacao-capacidade-auditoria {
+    color: black;
+    font-size: 1.8em;
+    margin: 0 0 20px 0;
+    text-decoration: underline;
+}
+
+.div-opcao-aprovacao {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.select-aprovacao {
+    width: 20%;
+    margin-left: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}

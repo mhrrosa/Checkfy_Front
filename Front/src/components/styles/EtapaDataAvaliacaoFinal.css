@@ -1,0 +1,11 @@
+.input-date {
+    margin-left: 20px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}

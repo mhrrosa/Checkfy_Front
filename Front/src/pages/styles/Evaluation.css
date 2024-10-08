@@ -1,0 +1,59 @@
+.evaluation-title {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.main-content-evaluation {
+  flex: 1; /* Ocupa o espaço restante */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite rolagem se o conteúdo for maior que a tela */
+}
+
+.textarea-field {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  margin-left: 10px;
+}
+
+.checkbox-input {
+  margin-right: 10px;
+}
+
+.mensagem-usuario {
+  color: rgb(0, 0, 0);
+}
+
+.main-content-evaluation {
+  flex: 1;
+  padding: 20px;
+}
+
+.textarea-field {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.checkbox-input {
+  margin-right: 10px;
+}
+
+.mensagem-usuario {
+  color: rgb(0, 0, 0);
+}

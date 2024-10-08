@@ -1,0 +1,37 @@
+.tabela-confete {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+  
+.tabela-confete td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 30%;
+}
+
+.tabela-confete td:first-child {
+    width: 30%;
+}
+
+.tabela-confete td:last-child {
+    width: 70%;
+}
+  
+.tabela-confete tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+  
+.tabela-confete th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.div-resultado-auditoria-confete {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
