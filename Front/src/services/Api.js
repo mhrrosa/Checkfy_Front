@@ -1,4 +1,4 @@
-const baseUrl = 'https://checkfybackend.vercel.app/';
+const baseUrl = 'https://checkfybackend.vercel.app';
 
 function post(url, data) {
   return fetch(`${baseUrl}${url}`, {
