@@ -10,6 +10,7 @@ function EtapaApresentacoesIniciais({ onNext, avaliacaoId }) {
   const [apresentacoesRealizadas, setApresentacoesRealizadas] = useState(null);
   const [equipeTreinada, setEquipeTreinada] = useState(null);
   const [dadosSalvos, setDadosSalvos] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
 
   // Buscar os dados de apresentação inicial e equipe treinada ao montar o componente
   useEffect(() => {
@@ -23,6 +24,8 @@ function EtapaApresentacoesIniciais({ onNext, avaliacaoId }) {
         }
       } catch (error) {
         console.error('Erro ao buscar os dados de apresentação e equipe:', error);
+      } finally {
+        setIsLoading(false); // Definir isLoading como false após a busca
       }
     }
 
@@ -65,6 +68,10 @@ function EtapaApresentacoesIniciais({ onNext, avaliacaoId }) {
 
   const isSaveButtonEnabled = apresentacoesRealizadas !== null && equipeTreinada !== null;
   const isNextButtonEnabled = dadosSalvos && apresentacoesRealizadas === true && equipeTreinada === true;
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Renderiza um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className='container-etapa'>

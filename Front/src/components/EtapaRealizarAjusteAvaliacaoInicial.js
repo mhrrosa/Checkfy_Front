@@ -15,20 +15,10 @@ import '../components/styles/EtapaRealizarAjusteAvaliacaoInicial.css';
 
 function EtapaRealizarAjusteAvaliacaoInicial({ onBack }) {
   const location = useLocation();
-  const [avaliacao, setAvaliacao] = useState({
-    nome_empresa: '',
-    descricao: '',
-    status: '',
-    id_empresa: '',
-    id_nivel_solicitado: '',
-    nome_avaliador_lider: '',
-    cronograma_planejamento: '',
-    atividade_planejamento: '',
-    descricao_relatorio_ajuste_inicial: '',
-    caminho_arquivo_relatorio_ajuste_inicial: '' // Campo para armazenar o caminho do arquivo
-  });
+  const [avaliacao, setAvaliacao] = useState(null); // Initialize as null
   const [isSaving, setIsSaving] = useState(false); // Controle de múltiplas submissões
   const [file, setFile] = useState(null); // Estado para armazenar o arquivo selecionado
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     const fetchAvaliacao = async () => {
@@ -37,6 +27,8 @@ function EtapaRealizarAjusteAvaliacaoInicial({ onBack }) {
         setAvaliacao(data);
       } catch (error) {
         console.error('Erro ao buscar avaliação:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false after data is fetched
       }
     };
     fetchAvaliacao();
@@ -115,7 +107,6 @@ function EtapaRealizarAjusteAvaliacaoInicial({ onBack }) {
   const handleSalvar = async () => {
     setIsSaving(true);
     try {
-      
       await salvarEmpresa();
       await salvarAvaliacao();
       let caminhoArquivo = avaliacao.caminho_arquivo_relatorio_ajuste_inicial;
@@ -134,9 +125,16 @@ function EtapaRealizarAjusteAvaliacaoInicial({ onBack }) {
       setIsSaving(false);
     }
   };
-  
 
-    return (
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
+
+  if (!avaliacao) {
+    return <div>Erro ao carregar dados da avaliação.</div>; // Handle case where data is null
+  }
+  
+  return (
     <div className='container-etapa'>
       <h1 className='title-form'>AJUSTE DA AVALIAÇÃO INICIAL</h1>
       <div className="lista-input">

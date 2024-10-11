@@ -12,6 +12,7 @@ function EtapaAcordoConfidencialidade({ onNext, avaliacaoId, idAtividade }) {
     const [existingAcordo, setExistingAcordo] = useState(null);
     const [canEdit, setCanEdit] = useState(idAtividade === 5);
     const [isSaved, setIsSaved] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
 
     useEffect(() => {
         const fetchAcordoConfidencialidade = async () => {
@@ -26,9 +27,11 @@ function EtapaAcordoConfidencialidade({ onNext, avaliacaoId, idAtividade }) {
                 console.log('CanEdit:', canEdit);
             } catch (error) {
                 console.error('Erro ao buscar acordo de confidencialidade:', error);
+            } finally {
+                setIsLoading(false); // Definir isLoading como false após a busca
             }
         };
-    
+
         fetchAcordoConfidencialidade();
         console.log('ID da Atividade:', idAtividade);
     }, [avaliacaoId, idAtividade]);
@@ -70,6 +73,10 @@ function EtapaAcordoConfidencialidade({ onNext, avaliacaoId, idAtividade }) {
         }
         onNext();
     };
+
+    if (isLoading) {
+        return <div>Carregando...</div>; // Renderiza um indicador de carregamento enquanto os dados são buscados
+    }
 
     return (
         <div className="container-etapa">

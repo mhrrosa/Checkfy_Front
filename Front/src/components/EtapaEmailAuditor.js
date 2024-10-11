@@ -9,12 +9,11 @@ import '../components/styles/Button.css';
 function CadastroAuditor({ onNext, avaliacaoId }) {
   const [emailAuditor, setEmailAuditor] = useState(''); // Estado para controlar o valor do campo
   const [auditorExiste, setAuditorExiste] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Inicializa como true
   const [isSaving, setIsSaving] = useState(false);  // Controle de múltiplas submissões
 
   useEffect(() => {
     async function fetchEmailAuditor() {
-      setIsLoading(true);  // Ativa o estado de carregamento
       try {
         const response = await getEmailAuditor(avaliacaoId);
         if (response) {
@@ -73,6 +72,10 @@ function CadastroAuditor({ onNext, avaliacaoId }) {
     onNext();  // Navega para a próxima etapa
   };
 
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
+
   return (
     <div className='container-etapa'>
       <h1 className='title-form'>CADASTRO DO AUDITOR</h1>
@@ -96,7 +99,7 @@ function CadastroAuditor({ onNext, avaliacaoId }) {
       </div>
 
       <button className='button-save' onClick={salvarDados} disabled={isLoading || isSaving}>
-        {isLoading ? 'SALVANDO...' : 'SALVAR'}
+        {isSaving ? 'SALVANDO...' : 'SALVAR'}
       </button>
       <button className='button-next' onClick={proximaEtapa} disabled={isLoading}>
         PRÓXIMA ETAPA

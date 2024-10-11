@@ -41,6 +41,8 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
   const [evidenciasProjeto, setEvidenciasProjeto] = useState({});
   const [evidenciasOrganizacional, setEvidenciasOrganizacional] = useState({});
 
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
+
   const parentTabs = ['Projeto', 'Organizacional'];
 
   const options = [
@@ -120,17 +122,20 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
   };
 
   const carregarDados = async () => {
-    await carregarProjetos();
-    await carregarProcessosOrganizacionais();
-    await carregarPerguntasProjeto();
-    await carregarPerguntasOrganizacional();
+    try {
+      await carregarProjetos();
+      await carregarProcessosOrganizacionais();
+      await carregarPerguntasProjeto();
+      await carregarPerguntasOrganizacional();
 
-    await carregarRespostasProjeto();
-    await carregarRespostasOrganizacional();
+      await carregarRespostasProjeto();
+      await carregarRespostasOrganizacional();
 
-    // Removendo chamadas para carregar evidências daqui
-    // await carregarEvidenciasProjeto();
-    // await carregarEvidenciasOrganizacional();
+      setIsLoading(false); // Definir isLoading como false após o carregamento dos dados
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+      setIsLoading(false); // Mesmo em caso de erro, precisamos parar o carregamento
+    }
   };
 
   const carregarProjetos = async () => {
@@ -288,7 +293,6 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
           id_projeto: projectId,
           caminho_arquivo: result.filepath,
           nome_arquivo: file.name,
-          // No need to include avaliacaoId here as it's fetched from the project in the backend
         };
         await addEvidenciaProjeto(data);
         await carregarEvidenciasProjeto();
@@ -347,7 +351,7 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
 
   const renderProjectContent = () => {
     if (!projetos || projetos.length === 0) {
-      return <p>Carregando projetos...</p>;
+      return <p>Nenhum projeto disponível.</p>;
     }
 
     return (
@@ -429,7 +433,7 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
 
   const renderOrganizationalContent = () => {
     if (!processosOrganizacionais || processosOrganizacionais.length === 0) {
-      return <p>Carregando processos organizacionais...</p>;
+      return <p>Nenhum processo organizacional disponível.</p>;
     }
 
     return (
@@ -579,6 +583,10 @@ function EtapaCaracterizacaoCapacidadeProcesso({ avaliacaoId, idVersaoModelo, on
     salvarRespostasProjeto();
     salvarRespostasOrganizacional();
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className="container-etapa">

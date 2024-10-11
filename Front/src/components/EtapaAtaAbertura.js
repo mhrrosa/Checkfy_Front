@@ -8,8 +8,9 @@ import '../components/styles/Button.css';
 import '../components/styles/Etapas.css';
 import '../components/styles/EtapaAtividadesPlanejamento.css';
 
-function AtaReuniaoAbertura({onNext, avaliacaoId }) {
+function AtaReuniaoAbertura({ onNext, avaliacaoId }) {
   const [ataReuniao, setAtaReuniao] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,15 +22,17 @@ function AtaReuniaoAbertura({onNext, avaliacaoId }) {
   const carregarAtaReuniao = async () => {
     try {
       const data = await getAvaliacaoById(avaliacaoId);
-  
+
       if (data) {
         setAtaReuniao(data.ata_reuniao_abertura || '');
       }
     } catch (error) {
       console.error('Erro ao carregar dados da ata de reunião:', error);
+    } finally {
+      setIsLoading(false); // Definir isLoading como false após a busca
     }
   };
-  
+
   const salvarAtaReuniao = async () => {
     try {
       const data = {
@@ -44,35 +47,39 @@ function AtaReuniaoAbertura({onNext, avaliacaoId }) {
     }
   };
 
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
+
   return (
     <div className='container-etapa'>
       <div className='title-container'>
         <h1 className='title-form'>ATA DE REUNIÃO DE ABERTURA DA AVALIAÇÃO FINAL</h1>
       </div>
-        <div className='dica-div'>
-            <strong className='dica-titulo'>Observação:</strong> {/* Texto de dica mais escuro */}
-            <p className='dica-texto'>
-            1 - Avaliador Líder: Apresentou os níveis MR-MPS e o processo de avaliação. Explicou o Acordo de Confidencialidade, escopo e nível de maturidade pleiteado.
-            </p>
-            <p className='dica-texto'>
-            2 - Patrocinador: Reforçou o motivo da avaliação e a importância do apoio dos colaboradores. Destacou a prioridade de respeitar horários e ser sincero nas entrevistas.
-            </p>
-            <p className='dica-texto'>
-            3 - Cronograma: O cronograma da avaliação foi apresentado e todos os participantes foram informados dos momentos de suas contribuições.
-            </p>
-            <p className='dica-texto'>
-            4 - Presença: Todos os colaboradores entrevistados devem estar presentes. Ausentes por força maior serão informados no início de suas entrevistas.
-            </p>
-        </div>
-        <label className="label-etapas">Ata de Reunião:</label>
-        <div className='dica-div'>
-          <strong className='dica-titulo'>Observação:</strong>
-          <p className="dica-texto">
-            Dica para preencher: adicionar dica
-          </p>
-        </div>
-        <br></br>
-        <div className='textarea-wrapper'>
+      <div className='dica-div'>
+        <strong className='dica-titulo'>Observação:</strong>
+        <p className='dica-texto'>
+          1 - Avaliador Líder: Apresentou os níveis MR-MPS e o processo de avaliação. Explicou o Acordo de Confidencialidade, escopo e nível de maturidade pleiteado.
+        </p>
+        <p className='dica-texto'>
+          2 - Patrocinador: Reforçou o motivo da avaliação e a importância do apoio dos colaboradores. Destacou a prioridade de respeitar horários e ser sincero nas entrevistas.
+        </p>
+        <p className='dica-texto'>
+          3 - Cronograma: O cronograma da avaliação foi apresentado e todos os participantes foram informados dos momentos de suas contribuições.
+        </p>
+        <p className='dica-texto'>
+          4 - Presença: Todos os colaboradores entrevistados devem estar presentes. Ausentes por força maior serão informados no início de suas entrevistas.
+        </p>
+      </div>
+      <label className="label-etapas">Ata de Reunião:</label>
+      <div className='dica-div'>
+        <strong className='dica-titulo'>Observação:</strong>
+        <p className="dica-texto">
+          Dica para preencher: adicionar dica
+        </p>
+      </div>
+      <br></br>
+      <div className='textarea-wrapper'>
         <textarea
           className="input-textarea-avaliacao"
           value={ataReuniao}

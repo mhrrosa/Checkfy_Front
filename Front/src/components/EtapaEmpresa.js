@@ -11,6 +11,7 @@ function EtapaEmpresa({ onNext, avaliacaoId }) {
   const [novaEmpresa, setNovaEmpresa] = useState('');
   const [novoCnpj, setNovoCnpj] = useState('');
   const [empresaCadastrada, setEmpresaCadastrada] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
 
   useEffect(() => {
     carregarEmpresas();
@@ -35,6 +36,8 @@ function EtapaEmpresa({ onNext, avaliacaoId }) {
       }
     } catch (error) {
       console.error('Erro ao carregar empresas ou avaliação:', error);
+    } finally {
+      setIsLoading(false); // Definir isLoading como false após a busca
     }
   };
 
@@ -71,6 +74,10 @@ function EtapaEmpresa({ onNext, avaliacaoId }) {
       setNovoCnpj('');
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className='container-etapa'>

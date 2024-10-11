@@ -21,11 +21,9 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
   const [resultadosEsperados, setResultadosEsperados] = useState({});
   const [projetos, setProjetos] = useState([]);
   const [evidencias, setEvidencias] = useState({});
-  const [selectedProcessoId, setSelectedProcessoId] = useState(null);
-  const [selectedResultadoId, setSelectedResultadoId] = useState(null);
-  const [selectedProjetoId, setSelectedProjetoId] = useState(null);
   const [grausImplementacao, setGrausImplementacao] = useState({});
-  const [activeTab, setActiveTab] = useState(null); // Estado para a aba ativa
+  const [activeTab, setActiveTab] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
 
   const options = [
     "Totalmente implementado (T)",
@@ -49,13 +47,19 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
   }, [activeTab]);
 
   const carregarDados = async () => {
-    await carregarProjetos();
-    await carregarProcessos();
-    await carregarGrausImplementacao();
-    if (activeTab) {
-      await carregarResultadosEsperados(activeTab);
-    } else if (processos.length > 0) {
-      setActiveTab(processos[0].ID);
+    try {
+      await carregarProjetos();
+      await carregarProcessos();
+      await carregarGrausImplementacao();
+      if (activeTab) {
+        await carregarResultadosEsperados(activeTab);
+      } else if (processos.length > 0) {
+        setActiveTab(processos[0].ID);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    } finally {
+      setIsLoading(false); // Definir isLoading como false após a busca
     }
   };
 
@@ -64,8 +68,8 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
       const data = await getProcessosPorAvaliacao(avaliacaoId, idVersaoModelo);
       setProcessos(data.processos);
       if (data.processos.length > 0) {
-        setActiveTab(data.processos[0].ID); // Defina a primeira aba como ativa
-        await carregarResultadosEsperados(data.processos[0].ID); // Carregar resultados e evidências para o primeiro processo
+        setActiveTab(data.processos[0].ID);
+        await carregarResultadosEsperados(data.processos[0].ID);
       }
     } catch (error) {
       console.error('Erro ao carregar processos:', error);
@@ -88,8 +92,8 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
         ...prevResultados,
         [processoId]: data
       }));
-  
-      // Agora, carrega as evidências para cada resultado esperado e cada projeto
+
+      // Carrega as evidências para cada resultado esperado e cada projeto
       if (projetos.length > 0) {
         for (const resultado of data) {
           for (const projeto of projetos) {
@@ -145,6 +149,10 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
       console.error('Erro ao atualizar grau de implementação:', error);
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className="container-etapa">
@@ -212,7 +220,7 @@ function EtapaCaracterizacao({ onNext, avaliacaoId, idVersaoModelo }) {
                             {evidencias[`${resultado.ID}-${projeto.ID}`] && evidencias[`${resultado.ID}-${projeto.ID}`]
                               .map(evidencia => (
                                 <div className='evidencia-e-botao' key={evidencia.id}>
-                                  <p className='title-evidencia-caracterizacao'>Evidencia: {evidencia.nomeArquivo}</p>
+                                  <p className='title-evidencia-caracterizacao'>Evidência: {evidencia.nomeArquivo}</p>
                                   <button className='button-mostrar-documento-etapa-evidencia' onClick={() => window.open(`http://127.0.0.1:5000/uploads/${evidencia.caminhoArquivo}`, '_blank')}>Mostrar</button>
                                 </div>
                               ))}

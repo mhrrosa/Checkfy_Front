@@ -12,6 +12,7 @@ function EtapaRelatorioAjusteInicial({ onNext, avaliacaoId }) {
   const [relatorioExiste, setRelatorioExiste] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null); // Estado para o arquivo selecionado
   const [existingFilePath, setExistingFilePath] = useState(''); // Caminho do arquivo existente
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     async function fetchRelatorio() {
@@ -27,6 +28,8 @@ function EtapaRelatorioAjusteInicial({ onNext, avaliacaoId }) {
         }
       } catch (error) {
         console.error('Erro ao buscar o relatório:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false after data is fetched
       }
     }
 
@@ -93,6 +96,10 @@ function EtapaRelatorioAjusteInicial({ onNext, avaliacaoId }) {
     }
   };
 
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
+
   return (
     <div className='container-etapa'>
       <h1 className='title-form'>RELATÓRIO DE AJUSTE</h1>
@@ -116,7 +123,7 @@ function EtapaRelatorioAjusteInicial({ onNext, avaliacaoId }) {
         <label className="label-etapas">Anexar Arquivo:</label>
         <input 
           type="file" 
-		  className='input-campo-relatorio-ajuste-inicial'
+          className='input-campo-relatorio-ajuste-inicial'
           onChange={(e) => setSelectedFile(e.target.files[0])} 
         />
         {existingFilePath && (

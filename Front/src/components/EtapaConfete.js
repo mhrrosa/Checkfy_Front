@@ -12,6 +12,7 @@ import img_certo from '../img/certo.png';
 
 function EtapaConfete({ avaliacaoId }) {
   const [avaliacao, setAvaliacao] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +22,8 @@ function EtapaConfete({ avaliacaoId }) {
         setAvaliacao(data);
       } catch (error) {
         console.error('Erro ao buscar avaliação:', error);
+      } finally {
+        setIsLoading(false); // Definir isLoading como false após a busca
       }
     };
 
@@ -38,6 +41,10 @@ function EtapaConfete({ avaliacaoId }) {
       alert('Erro ao finalizar a avaliação. Tente novamente.');
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className="container-etapa">

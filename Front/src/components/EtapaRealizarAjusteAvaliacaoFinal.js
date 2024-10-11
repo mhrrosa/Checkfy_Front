@@ -72,6 +72,7 @@ function EtapaRealizarAjusteAvaliacaoFinal({ avaliacaoId, idVersaoModelo, onBack
 
   const [evidenciasProjeto, setEvidenciasProjeto] = useState({});
   const [evidenciasOrganizacional, setEvidenciasOrganizacional] = useState({});
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   const parentTabs = [
     'Resultado Auditoria',
@@ -223,10 +224,6 @@ function EtapaRealizarAjusteAvaliacaoFinal({ avaliacaoId, idVersaoModelo, onBack
 
       await carregarResumoAvaliacao(processosLoaded);
 
-      // Removendo chamadas para carregar evidências daqui
-      // await carregarEvidenciasProjeto();
-      // await carregarEvidenciasOrganizacional();
-
       if (activeParentTab === 'Processos') {
         if (processosLoaded.length > 0) {
           setActiveChildTab(processosLoaded[0].ID);
@@ -234,6 +231,8 @@ function EtapaRealizarAjusteAvaliacaoFinal({ avaliacaoId, idVersaoModelo, onBack
       }
     } catch (error) {
       console.error('Erro ao carregar dados da avaliação:', error);
+    } finally {
+      setIsLoading(false); // Set loading to false after data is fetched
     }
   };
 
@@ -1331,6 +1330,11 @@ function EtapaRealizarAjusteAvaliacaoFinal({ avaliacaoId, idVersaoModelo, onBack
         return null;
     }
   };
+
+  // Before rendering, check if data is still loading
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
 
   return (
     <div className="container-etapa">

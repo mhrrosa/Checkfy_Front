@@ -33,7 +33,8 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
   const [novoDocumentoNome, setNovoDocumentoNome] = useState('');
   const [fileToUpload, setFileToUpload] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(null); // Estado para a aba ativa
+  const [activeTab, setActiveTab] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     if (avaliacaoId && idVersaoModelo) {
@@ -48,12 +49,18 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
   }, [activeTab]);
 
   const carregarDados = async () => {
-    await carregarProjetos();
-    await carregarProcessos();
-    if (activeTab) {
-      await carregarResultadosEsperados(activeTab);
-    } else if (processos.length > 0) {
-      setActiveTab(processos[0].ID);
+    try {
+      await carregarProjetos();
+      await carregarProcessos();
+      if (activeTab) {
+        await carregarResultadosEsperados(activeTab);
+      } else if (processos.length > 0) {
+        setActiveTab(processos[0].ID);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    } finally {
+      setIsLoading(false); // Set loading to false after data is fetched
     }
   };
 
@@ -62,8 +69,8 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
       const data = await getProcessosPorAvaliacao(avaliacaoId, idVersaoModelo);
       setProcessos(data.processos);
       if (data.processos.length > 0) {
-        setActiveTab(data.processos[0].ID); // Defina a primeira aba como ativa
-        await carregarResultadosEsperados(data.processos[0].ID); // Carregar resultados e evidências para o primeiro processo
+        setActiveTab(data.processos[0].ID);
+        await carregarResultadosEsperados(data.processos[0].ID);
       }
     } catch (error) {
       console.error('Erro ao carregar processos:', error);
@@ -86,8 +93,8 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
         ...prevResultados,
         [processoId]: data
       }));
-  
-      // Aguarde o carregamento dos projetos antes de carregar as evidências
+
+      // Ensure projects are loaded before loading evidences
       if (projetos.length > 0) {
         for (const resultado of data) {
           for (const projeto of projetos) {
@@ -99,7 +106,6 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
       console.error('Erro ao carregar resultados esperados:', error);
     }
   };
-  
 
   const carregarDocumentos = async (projetoId) => {
     try {
@@ -168,7 +174,11 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
       });
       const result = await response.json();
       if (response.ok) {
-        const documentoData = { caminho_arquivo: result.filepath, nome_arquivo: novoDocumentoNome, id_projeto: selectedProjetoId };
+        const documentoData = {
+          caminho_arquivo: result.filepath,
+          nome_arquivo: novoDocumentoNome,
+          id_projeto: selectedProjetoId
+        };
         const documentoResponse = await addDocumento(documentoData);
         const novoDocumento = {
           id: documentoResponse.documentoId,
@@ -188,7 +198,11 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
   };
 
   const handleAtualizarDocumento = async (id, nomeArquivo, caminhoArquivo) => {
-    const documentoData = { caminho_arquivo: caminhoArquivo, nome_arquivo: nomeArquivo, id_projeto: selectedProjetoId };
+    const documentoData = {
+      caminho_arquivo: caminhoArquivo,
+      nome_arquivo: nomeArquivo,
+      id_projeto: selectedProjetoId
+    };
     try {
       await updateDocumento(id, documentoData);
       await carregarEvidencias(selectedResultadoId, selectedProjetoId);
@@ -201,7 +215,7 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
     try {
       await deleteDocumento(documentoId);
       setDocumentos(prevDocumentos => prevDocumentos.filter(doc => doc.id !== documentoId));
-      recarregarEvidencias(); // Recarregar todas as evidências após a exclusão
+      recarregarEvidencias();
     } catch (error) {
       console.error('Erro ao deletar documento:', error);
     }
@@ -209,7 +223,10 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
 
   const handleAdicionarEvidencia = async (documentoId) => {
     try {
-      const evidenciaData = { id_resultado_esperado: selectedResultadoId, id_documento: documentoId };
+      const evidenciaData = {
+        id_resultado_esperado: selectedResultadoId,
+        id_documento: documentoId
+      };
       await addEvidencia(evidenciaData);
       const novaEvidencia = {
         id: documentoId,
@@ -219,7 +236,10 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
       };
       setEvidencias(prevEvidencias => ({
         ...prevEvidencias,
-        [`${selectedResultadoId}-${selectedProjetoId}`]: [...(prevEvidencias[`${selectedResultadoId}-${selectedProjetoId}`] || []), novaEvidencia]
+        [`${selectedResultadoId}-${selectedProjetoId}`]: [
+          ...(prevEvidencias[`${selectedResultadoId}-${selectedProjetoId}`] || []),
+          novaEvidencia
+        ]
       }));
     } catch (error) {
       console.error('Erro ao adicionar evidência:', error);
@@ -228,8 +248,11 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
 
   const handleExcluirEvidencia = async (resultadoId, documentoId) => {
     try {
-      await deleteEvidencia({ id_resultado_esperado: resultadoId, id_documento: documentoId });
-      recarregarEvidencias(); // Recarregar todas as evidências após a exclusão
+      await deleteEvidencia({
+        id_resultado_esperado: resultadoId,
+        id_documento: documentoId
+      });
+      recarregarEvidencias();
     } catch (error) {
       console.error('Erro ao excluir evidência:', error);
     }
@@ -251,6 +274,11 @@ function EtapaEvidencia({ avaliacaoId, idVersaoModelo, onNext }) {
     setSelectedProjetoId(null);
     setDocumentos([]);
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator
+  }
+
 
   return (
     <div className="container-etapa">

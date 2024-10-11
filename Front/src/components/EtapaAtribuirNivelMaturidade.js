@@ -13,12 +13,11 @@ function EtapaAtribuirNivelMaturidade({ onNext }) {
   const [niveis, setNiveis] = useState([]);
   const [selectedNivel, setSelectedNivel] = useState('');
   const [satisfacao, setSatisfacao] = useState(''); // Estado para o seletor de satisfação
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Inicializa como true
   const [nivelDisabled, setNivelDisabled] = useState(false); // Controla se o seletor de nível está desabilitado
 
   useEffect(() => {
     const fetchAvaliacao = async () => {
-      setIsLoading(true);
       try {
         const data = await getAvaliacaoById(location.state.id);
         setAvaliacao(data);
@@ -41,7 +40,7 @@ function EtapaAtribuirNivelMaturidade({ onNext }) {
       } catch (error) {
         console.error('Erro ao buscar avaliação ou níveis:', error);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Garante que isLoading seja false após a busca
       }
     };
     fetchAvaliacao();
@@ -99,7 +98,11 @@ function EtapaAtribuirNivelMaturidade({ onNext }) {
     }
   };
 
-    return (
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
+
+  return (
     <div className="container-etapa">
       <h1 className="title-form">ATRIBUIR NÍVEL DE MATURIDADE</h1>
   

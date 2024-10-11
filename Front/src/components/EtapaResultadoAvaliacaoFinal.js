@@ -10,11 +10,8 @@ import '../components/styles/EtapaResultadoAvaliacaoFinal.css';
 
 function EtapaResultadoAvaliacaoFinal({ onNext }) {
   const location = useLocation();
-  const [avaliacao, setAvaliacao] = useState({
-    nivel_solicitado: '',
-    resultado: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  const [avaliacao, setAvaliacao] = useState(null); // Initialize as null
+  const [isLoading, setIsLoading] = useState(true); // Set initial loading state to true
 
   useEffect(() => {
     const fetchAvaliacao = async () => {
@@ -34,7 +31,15 @@ function EtapaResultadoAvaliacaoFinal({ onNext }) {
     fetchAvaliacao();
   }, [location.state.id]);
 
-    return (
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
+
+  if (!avaliacao) {
+    return <div>Erro ao carregar dados da avaliação.</div>; // Handle case where data is null
+  }
+
+  return (
     <div className='container-etapa'>
       <h1 className='title-form'>RESULTADO DA AVALIAÇÃO FINAL</h1>
   
@@ -70,7 +75,10 @@ function EtapaResultadoAvaliacaoFinal({ onNext }) {
         alignItems: 'center',
         marginTop: '20px'
       }}>
-        <button className='button-confirmar-visualizacao' onClick={onNext} disabled={isLoading}
+        <button
+          className='button-confirmar-visualizacao'
+          onClick={onNext}
+          disabled={isLoading}
         >
           CONFIRMAR VISUALIZAÇÃO
         </button>

@@ -10,31 +10,19 @@ import '../components/styles/EtapaAuditoriaAvaliacaoInicial.css';
 
 function EtapaAuditoriaInicial({ onNext, onDuploNext }) {
   const location = useLocation();
-  const [avaliacao, setAvaliacao] = useState({
-    nome: '',
-    descricao: '',
-    id_empresa: '',
-    id_nivel_solicitado: '',
-    id_avaliador_lider: '',
-    id_atividade: '',
-    id_versao_modelo: '',
-    relatorio_ajuste: '',
-    caminho_arquivo_relatorio_ajuste_inicial: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  const [avaliacao, setAvaliacao] = useState(null); // Inicializado como null
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento inicializado como true
   const [buttonText, setButtonText] = useState('APROVAR');
-  const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
     const fetchAvaliacao = async () => {
-      setIsLoading(true);
       try {
         const data = await getAvaliacaoById(location.state.id);
         setAvaliacao(data);
       } catch (error) {
         console.error('Erro ao buscar avaliação:', error);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Definir isLoading como false após a busca
       }
     };
     fetchAvaliacao();
@@ -65,19 +53,25 @@ function EtapaAuditoriaInicial({ onNext, onDuploNext }) {
     }
   };
 
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
+
   return (
     <div className='container-etapa'>
       <h1 className='title-form'>AUDITORIA DA AVALIAÇÃO INICIAL</h1>
       <div className="lista-input">
         <table className='tabela-etapas'>
           <tbody>
-            {[{ label: "Nome da empresa", value: avaliacao.nome_empresa },
+            {[
+              { label: "Nome da empresa", value: avaliacao.nome_empresa },
               { label: "Descrição", value: avaliacao.descricao },
               { label: "Nível Solicitado", value: avaliacao.nivel_solicitado },
               { label: "Nome do Avaliador Líder", value: avaliacao.nome_avaliador_lider },
               { label: "Cronograma", value: avaliacao.cronograma_planejamento },
               { label: "Atividades Planejadas", value: avaliacao.atividade_planejamento },
-              { label: "Relatório de Ajuste", value: avaliacao.descricao_relatorio_ajuste_inicial }]
+              { label: "Relatório de Ajuste", value: avaliacao.descricao_relatorio_ajuste_inicial }
+            ]
               .map((item, index) => (
                 <tr key={index} className='linha-etapas'>
                   <th className='label-etapas'>

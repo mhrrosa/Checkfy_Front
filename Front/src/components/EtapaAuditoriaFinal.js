@@ -54,6 +54,8 @@ function EtapaAuditoriaFinal({ avaliacaoId, idVersaoModelo, onNext, onDuploNext 
   const [evidenciasProjeto, setEvidenciasProjeto] = useState({});
   const [evidenciasOrganizacional, setEvidenciasOrganizacional] = useState({});
 
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
+
   const parentTabs = ['Informações Gerais', 'Processos', 'Resumo da Caracterização da Avaliação', 'Projeto', 'Organizacional', 'Resultado Auditoria'];
 
   const descricaoToAbbr = {
@@ -186,6 +188,8 @@ function EtapaAuditoriaFinal({ avaliacaoId, idVersaoModelo, onNext, onDuploNext 
       }
     } catch (error) {
       console.error('Erro ao carregar dados da avaliação:', error);
+    } finally {
+      setIsLoading(false); // Definir isLoading como false após a busca
     }
   };
 
@@ -863,6 +867,10 @@ function EtapaAuditoriaFinal({ avaliacaoId, idVersaoModelo, onNext, onDuploNext 
       </div>
     );
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className="container-etapa">

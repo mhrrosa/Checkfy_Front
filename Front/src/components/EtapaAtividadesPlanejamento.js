@@ -12,6 +12,7 @@ function EtapaAtividadesPlanejamento({ onNext, avaliacaoId }) {
   const [avaliacaoAprovada, setAvaliacaoAprovada] = useState(false);
   const [planejamentoAtividades, setPlanejamentoAtividades] = useState('');
   const [planejamentoCronograma, setPlanejamentoCronograma] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Estado de carregamento adicionado
   const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
@@ -32,6 +33,8 @@ function EtapaAtividadesPlanejamento({ onNext, avaliacaoId }) {
       }
     } catch (error) {
       console.error('Erro ao carregar dados da avaliação:', error);
+    } finally {
+      setIsLoading(false); // Definir isLoading como false após a busca
     }
   };
 
@@ -66,6 +69,10 @@ function EtapaAtividadesPlanejamento({ onNext, avaliacaoId }) {
       alert('Erro ao finalizar a avaliação. Tente novamente.');
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
 
   return (
     <div className='container-etapa'>
@@ -103,7 +110,6 @@ function EtapaAtividadesPlanejamento({ onNext, avaliacaoId }) {
       {/* Exibe os campos de planejamento apenas se a avaliação estiver aprovada */}
       {avaliacaoAprovada && (
         <>
-
           <h1 className="title-form">PLANEJAMENTO DE ATIVIDADES E CRONOGRAMA</h1>
           <div className='textarea-wrapper'>
             <label className="label">Planejamento de atividades para a avaliação:</label>
@@ -127,10 +133,10 @@ function EtapaAtividadesPlanejamento({ onNext, avaliacaoId }) {
               <p className="dica-texto">
                 Uma base para estimar o tempo da avaliação inicial, da avaliação final e a composição da equipe sugerida pelo MA-MPS:
                 <ul>
-                    <li><strong>Níveis A e B:</strong> 4-5 dias, com avaliador líder, adjunto(s) e representante(s) da unidade.</li>
-                    <li><strong>Níveis C e D:</strong> 2-4 dias, com avaliador líder, adjunto(s) e opcionalmente representante(s).</li>
-                    <li><strong>Níveis E e F:</strong> 2-3 dias, com avaliador líder, adjunto(s) e opcionalmente representante(s).</li>
-                    <li><strong>Nível G:</strong> 1-2 dias, com avaliador líder e opcionalmente adjunto(s) e representante(s).</li>
+                  <li><strong>Níveis A e B:</strong> 4-5 dias, com avaliador líder, adjunto(s) e representante(s) da unidade.</li>
+                  <li><strong>Níveis C e D:</strong> 2-4 dias, com avaliador líder, adjunto(s) e opcionalmente representante(s).</li>
+                  <li><strong>Níveis E e F:</strong> 2-3 dias, com avaliador líder, adjunto(s) e opcionalmente representante(s).</li>
+                  <li><strong>Nível G:</strong> 1-2 dias, com avaliador líder e opcionalmente adjunto(s) e representante(s).</li>
                 </ul>
               </p>
             </div>

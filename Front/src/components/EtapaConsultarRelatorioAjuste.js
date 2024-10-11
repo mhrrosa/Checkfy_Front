@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getAvaliacaoById } from '../services/Api'; // Função para buscar a avaliação
+import { getAvaliacaoById } from '../services/Api';
 import '../components/styles/Body.css';
 import '../components/styles/Container.css';
 import '../components/styles/Form.css';
@@ -10,15 +10,11 @@ import '../components/styles/EtapaConsultarRelatorioAjuste.css';
 
 function EtapaConsultarRelatorioAjuste({ onNext }) {
   const location = useLocation();
-  const [avaliacao, setAvaliacao] = useState({
-    descricao_relatorio_ajuste_inicial: '',
-    caminho_arquivo_relatorio_ajuste_inicial: ''
-  });
-  const [isLoading, setIsLoading] = useState(false); // Controle de carregamento
+  const [avaliacao, setAvaliacao] = useState(null); // Inicializa como null
+  const [isLoading, setIsLoading] = useState(true); // Inicia como true para indicar carregamento
 
   useEffect(() => {
     const fetchAvaliacao = async () => {
-      setIsLoading(true); // Ativa o estado de carregamento
       try {
         const data = await getAvaliacaoById(location.state.id);
         setAvaliacao(data);
@@ -35,7 +31,15 @@ function EtapaConsultarRelatorioAjuste({ onNext }) {
     onNext(); // Navega para a próxima etapa ao clicar em próximo
   };
 
-    return (
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento
+  }
+
+  if (!avaliacao) {
+    return <div>Erro ao carregar os dados da avaliação.</div>; // Trata caso a avaliação não seja carregada
+  }
+
+  return (
     <div className='container-etapa'>
       <h1 className='title-form'>CONSULTAR RELATÓRIO DE AJUSTE</h1>
       <div className='dica-div'>
@@ -50,10 +54,10 @@ function EtapaConsultarRelatorioAjuste({ onNext }) {
             <tr className='linha-etapas'>
               <th className='label-etapas'>Relatório de Ajuste:</th>
               <td className='valor-etapas'>
-                {avaliacao.descricao_relatorio_ajuste_inicial}
+                {avaliacao.descricao_relatorio_ajuste_inicial || 'Não disponível'}
               </td>
             </tr>
-            {avaliacao.caminho_arquivo_relatorio_ajuste_inicial && (
+            {avaliacao.caminho_arquivo_relatorio_ajuste_inicial ? (
               <tr className='linha-etapas'>
                 <th className='label-etapas'>Arquivo de Relatório de Ajuste:</th>
                 <td className='valor-etapas'>
@@ -64,6 +68,13 @@ function EtapaConsultarRelatorioAjuste({ onNext }) {
                   >
                     MOSTRAR
                   </button>
+                </td>
+              </tr>
+            ) : (
+              <tr className='linha-etapas'>
+                <th className='label-etapas'>Arquivo de Relatório de Ajuste:</th>
+                <td className='valor-etapas'>
+                  Não disponível
                 </td>
               </tr>
             )}

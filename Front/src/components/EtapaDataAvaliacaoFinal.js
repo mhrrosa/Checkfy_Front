@@ -10,12 +10,11 @@ import '../components/styles/Button.css';
 function CadastroDataAvaliacao({ onNext, avaliacaoId }) {
   const [dataAvaliacaoFinal, setDataAvaliacaoFinal] = useState(''); // Estado para controlar a data de avaliação
   const [dataExiste, setDataExiste] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Inicializa como true
   const [isSaving, setIsSaving] = useState(false);  // Controle de múltiplas submissões
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);  // Ativa o estado de carregamento
       try {
         const response = await getData(avaliacaoId);
         if (response && response.dataAvaliacaoFinal) {
@@ -91,6 +90,10 @@ function CadastroDataAvaliacao({ onNext, avaliacaoId }) {
     }
   };
 
+  if (isLoading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento enquanto os dados são buscados
+  }
+
   return (
     <div className='container-etapa'>
       <h1 className='title-form'>DEFINIÇÃO DA DATA DE AVALIAÇÃO FINAL</h1>
@@ -118,7 +121,7 @@ function CadastroDataAvaliacao({ onNext, avaliacaoId }) {
       </div>
       <br></br>
       <button className='button-save' onClick={salvarDados} disabled={isLoading || isSaving}>
-          {isLoading ? 'SALVANDO...' : 'SALVAR'}
+          {isSaving ? 'SALVANDO...' : 'SALVAR'}
       </button>
       <button 
         className='button-next' 

@@ -4,7 +4,7 @@ import '../components/styles/Body.css';
 import '../components/styles/Container.css';
 import '../components/styles/Form.css';
 import '../components/styles/Button.css';
-import '../components/styles/EtapaProjeto.css'
+import '../components/styles/EtapaProjeto.css';
 import logo from '../img/logo_horizontal.png';
 
 function EtapaProjeto({ onNext, avaliacaoId }) {
@@ -13,6 +13,7 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
   const [novoProjetoHabilitado, setNovoProjetoHabilitado] = useState(false);
   const [editandoProjeto, setEditandoProjeto] = useState(false);
   const [selectedProjetoId, setSelectedProjetoId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     if (avaliacaoId) {
@@ -26,6 +27,8 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
       setProjetos(data);
     } catch (error) {
       console.error('Erro ao carregar projetos:', error);
+    } finally {
+      setIsLoading(false); // Set loading to false after data is fetched
     }
   };
 
@@ -37,7 +40,7 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
       } else {
         await createProjeto(projetoData);
       }
-      carregarProjetos();
+      await carregarProjetos();
       resetarFormulario();
     } catch (error) {
       console.error('Erro ao salvar projeto:', error);
@@ -55,11 +58,17 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
     try {
       const projetoData = { nome, habilitado };
       await updateProjeto(projetoId, projetoData);
-      setProjetos(prevProjetos => prevProjetos.map(proj => (proj['ID'] === projetoId ? { ...proj, Nome_Projeto: nome, Projeto_Habilitado: habilitado } : proj)));
+      setProjetos(prevProjetos =>
+        prevProjetos.map(proj => (proj['ID'] === projetoId ? { ...proj, Nome_Projeto: nome, Projeto_Habilitado: habilitado } : proj))
+      );
     } catch (error) {
       console.error('Erro ao atualizar projeto:', error);
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
 
   return (
     <div className='container-etapa'>
@@ -78,7 +87,8 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
         </div>
         <div className='checkbox-wrapper-project'>
           <label className="label-etapas">Projeto Habilitado:</label>
-          <input className='checkbox-project'
+          <input
+            className='checkbox-project'
             type="checkbox"
             checked={novoProjetoHabilitado}
             onChange={(e) => setNovoProjetoHabilitado(e.target.checked)}
@@ -122,7 +132,12 @@ function EtapaProjeto({ onNext, avaliacaoId }) {
                   </label>
                 </td>
                 <td className='acao-td-projetos'>
-                  <button className='button-update-project' onClick={() => atualizarProjeto(projeto.ID, projeto.Nome_Projeto, projeto.Projeto_Habilitado)}>ATUALIZAR</button>
+                  <button
+                    className='button-update-project'
+                    onClick={() => atualizarProjeto(projeto.ID, projeto.Nome_Projeto, projeto.Projeto_Habilitado)}
+                  >
+                    ATUALIZAR
+                  </button>
                 </td>
               </tr>
             ))}

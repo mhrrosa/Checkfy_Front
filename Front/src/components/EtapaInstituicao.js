@@ -11,6 +11,7 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
   const [novaInstituicao, setNovaInstituicao] = useState('');
   const [novoCnpj, setNovoCnpj] = useState('');
   const [instituicaoCadastrada, setInstituicaoCadastrada] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
 
   useEffect(() => {
     carregarInstituicoes();
@@ -27,7 +28,7 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
       setInstituicoes(instituicoesFormatadas);
 
       const avaliacaoData = await getAvaliacaoById(avaliacaoId);
-      if (avaliacaoData && avaliacaoData.id_instituicao) {  // Verifica se já há uma instituição associada
+      if (avaliacaoData && avaliacaoData.id_instituicao) {
         setInstituicaoSelecionada(avaliacaoData.id_instituicao);
         setInstituicaoCadastrada(true);
       } else {
@@ -36,6 +37,8 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
       }
     } catch (error) {
       console.error('Erro ao carregar instituições ou avaliação:', error);
+    } finally {
+      setIsLoading(false); // Set loading to false after data is fetched
     }
   };
 
@@ -58,6 +61,7 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
         }
       } else if (instituicaoSelecionada) {
         await instituicaoAvaliacaoInsert(avaliacaoId, { idInstituicao: instituicaoSelecionada });
+        alert('Instituição associada com sucesso!');
       }
     } catch (error) {
       console.error('Erro ao salvar os dados:', error);
@@ -72,6 +76,10 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
       setNovoCnpj('');
     }
   };
+
+  if (isLoading) {
+    return <div>Carregando...</div>; // Display loading indicator while data is being fetched
+  }
 
   return (
     <div className='container-etapa'>
@@ -98,14 +106,12 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
         </label>
       </div>
       {instituicaoCadastrada && (
-        <>
-          <div className="input-wrapper">
+        <div className="input-wrapper">
           <label className="label">Instituições cadastradas:</label>
           <select
             className="input-field"
             value={instituicaoSelecionada}
             onChange={(e) => setInstituicaoSelecionada(e.target.value)}
-            disabled={!instituicaoCadastrada}
           >
             <option value="">Selecione a Instituição</option>
             {instituicoes.map(i => (
@@ -113,7 +119,6 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
             ))}
           </select>
         </div>
-        </>
       )}
       {!instituicaoCadastrada && (
         <>
@@ -127,7 +132,6 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
               placeholder="Digite o nome da instituição"
             />
           </div>
-          
           <div className="input-wrapper">
             <label className="label">CNPJ da nova instituição:</label>
             <input
@@ -140,7 +144,6 @@ function EtapaInstituicaoAvaliadora({ onNext, avaliacaoId }) {
           </div>
         </>
       )}
-
       <button className='button-save' onClick={salvarDados}>SALVAR</button>
       <button className='button-next' onClick={() => onNext(avaliacaoId)}>PRÓXIMA ETAPA</button>
     </div>
